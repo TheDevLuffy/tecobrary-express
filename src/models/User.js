@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(255),
       allowNull: false
     },
-    authorization: { // TODO: 써서 권한 있는지 없는지 확인도 해야됨
-      type: DataTypes.INTEGER(11),
+    authorization: {
+      type: DataTypes.ENUM('NONE', 'USER', 'MANAGER', 'KING'),
       defaultValue: 0,
       allowNull: false
     }
