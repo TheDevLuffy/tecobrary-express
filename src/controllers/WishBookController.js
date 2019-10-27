@@ -1,5 +1,6 @@
 const { WishBook, LibraryBook, User } = require('../models')
 const logger = require('../logger')
+const SlackBotEvent = require('../api/SlackBotEvent')
 
 function parseTitle(title) {
   if (title.length >= 25) {
@@ -35,6 +36,7 @@ module.exports = {
         user_id
       })
       const requestJson = request.toJSON()
+      SlackBotEvent.notifyNewWishBook(requestJson)
       res.send({
         message: `[${parseTitle(requestJson.title)}] 신청 성공`
       })
@@ -95,6 +97,7 @@ module.exports = {
         isbn,
         desc
       })
+      SlackBotEvent.notifyWishBookEnrolled(book)
       res.send({
         message: `${book.title} 등록 성공`
       })
