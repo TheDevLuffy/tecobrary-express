@@ -5,7 +5,7 @@ const JwtStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
 
 const config = require('./config/config')
-const logger = require('../logger')
+const logger = require('./logger')
 
 passport.use(
   new JwtStrategy({
