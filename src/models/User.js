@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     authorization: {
-      type: DataTypes.ENUM('NONE', 'USER', 'MANAGER', 'KING'),
-      defaultValue: 0,
+      type: DataTypes.ENUM('none', 'user', 'manager', 'god'),
+      defaultValue: 'none',
       allowNull: false
     }
   }, {
