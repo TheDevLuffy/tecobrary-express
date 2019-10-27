@@ -5,6 +5,7 @@ const JwtStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
 
 const config = require('./config/config')
+const logger = require('../logger')
 
 passport.use(
   new JwtStrategy({
@@ -17,7 +18,7 @@ passport.use(
           id: jwtPayload.id
         }
       })
-      console.log(user)
+      logger.info(user)
       if (!user) {
         return done(new Error("존재하지 않는 유저"), false)
       }

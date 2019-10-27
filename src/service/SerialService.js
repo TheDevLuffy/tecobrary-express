@@ -8,7 +8,6 @@ const findById = async (serialId) => {
   const savedSerial = await Serial.findOne({
     where: {id: serialId}
   })
-  console.log(savedSerial)
   if (!savedSerial) {
     return null
   }

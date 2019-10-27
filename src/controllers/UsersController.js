@@ -1,41 +1,6 @@
 const { User } = require('../models')
 const logger = require('../logger')
 
-const _AUTH_NONE = 'NONE'
-const _AUTH_USER = 'USER'
-const _AUTH_MANAGER = 'MANAGER'
-const _AUTH_KING = 'KING'
-
-function authorizationParser(number) {
-  if (number === 0) {
-    return _AUTH_NONE
-  }
-  if (number === 1) {
-    return _AUTH_USER
-  }
-  if (number === 2) {
-    return _AUTH_MANAGER
-  }
-  if (number === 3) {
-    return _AUTH_KING
-  }
-}
-
-function authorizationEncode(string) {
-  if (string.toUpperCase() === _AUTH_NONE) {
-    return 0
-  }
-  if (string.toUpperCase() === _AUTH_USER) {
-    return 1
-  }
-  if (string.toUpperCase() === _AUTH_MANAGER) {
-    return 2
-  }
-  if (string.toUpperCase() === _AUTH_KING || string.toUpperCase() === 'GOD') {
-    return 3
-  }
-}
-
 module.exports = {
   async all (req, res) {
     try {
@@ -47,7 +12,7 @@ module.exports = {
           id: parsedUser.id,
           email: parsedUser.email,
           name: parsedUser.name,
-          authorization: authorizationParser(parsedUser.authorization),
+          authorization: parsedUser.authorization,
           createdAt: parsedUser.createdAt
         })
       })
@@ -66,7 +31,7 @@ module.exports = {
     try {
       const { id, newAuthorization } = req.body
       const user = await User.update({
-        authorization: authorizationEncode(newAuthorization)
+        authorization: newAuthorization
       }, {
         where: {
           id

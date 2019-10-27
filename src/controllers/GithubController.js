@@ -6,24 +6,8 @@ const config = require('../config/config')
 const { getOauthUserUrl, getUserToken, getUserData } = require('./github/GithubUserOauth')
 const { getOauthManagerUrl, getManagerToken, getManagerData } = require('./github/GithubManagerOauth')
 
-function authorizationParser(number) {
-  if (number === 0) {
-    return 'NONE'
-  }
-  if (number === 1) {
-    return 'USER'
-  }
-  if (number === 2) {
-    return 'MANAGER'
-  }
-  if (number === 3) {
-    return 'KING'
-  }
-}
-
 function jwtSignUser(user) {
   const ONE_WEEK = 60 * 60 * 24 * 7
-  user.authorization = authorizationParser(user.authorization)
   return jwt.sign(user, config.authentication.jwtSecret, {
     expiresIn: ONE_WEEK
   })

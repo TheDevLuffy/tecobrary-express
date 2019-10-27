@@ -50,6 +50,6 @@ app.use('/rents', rentRouter)
 
 sequelize.sync()
   .then(() => {
-    app.listen(process.env.PORT || 8081)
+    app.listen(process.env.PORT || 8080)
     logger.info(`Server started on port ${process.env.PORT}`)
   })

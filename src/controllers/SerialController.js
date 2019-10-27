@@ -31,7 +31,7 @@ const addSerial = async(req, res) => {
       })
       return
     }
-    console.log("input serial", inputSerial)
+    logger.info("input serial", inputSerial)
     const serial = await SerialService.findById(inputSerial)
       if (serial) {
       res.status(400).send({
@@ -40,7 +40,7 @@ const addSerial = async(req, res) => {
       return
     }
     const createdSerial = await SerialService.createWithSerial(bookId, inputSerial)
-    console.log(createdSerial)
+    logger.info(createdSerial)
     res.send({
       serial: createdSerial
     })
