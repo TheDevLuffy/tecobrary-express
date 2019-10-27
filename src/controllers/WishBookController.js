@@ -104,5 +104,24 @@ module.exports = {
         error: error
       })
     }
+  },
+
+  async removeList(req, res) {
+    console.log(req.body)
+    try {
+      const { id } = req.body
+      await WishBook.destroy({
+        where: { id },
+        force: true
+      })
+      res.send({
+        message: `정상적으로 삭제되었습니다.`
+      })
+    } catch (error) {
+      logger.error(`[WishBookController.js] : ${error}`)
+      res.status(400).send({
+        error: error
+      })
+    }
   }
 }

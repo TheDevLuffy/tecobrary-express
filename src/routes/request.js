@@ -14,4 +14,8 @@ router.post('/register',
   WishBookController.register
 )
 
+router.post('/remove',
+  WishBookController.removeList
+)
+
 module.exports = router
