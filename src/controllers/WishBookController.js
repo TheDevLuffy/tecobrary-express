@@ -37,6 +37,9 @@ module.exports = {
       })
       const requestJson = request.toJSON()
       SlackBotEvent.notifyNewWishBook(requestJson)
+        .catch(error => {
+          logger.info(`[SlackBotEvent.notifyNewWishBook] : ${error}`)
+        })
       res.send({
         message: `[${parseTitle(requestJson.title)}] 신청 성공`
       })
@@ -98,6 +101,9 @@ module.exports = {
         desc
       })
       SlackBotEvent.notifyWishBookEnrolled(book)
+        .catch(error => {
+          logger.info(`[SlackBotEvent.notifyNewWishBook] : ${error}`)
+        })
       res.send({
         message: `${book.title} 등록 성공`
       })
