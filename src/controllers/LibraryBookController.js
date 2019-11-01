@@ -1,6 +1,8 @@
 const { LibraryBook, Serial } = require('../models')
 const logger = require('../logger')
 
+const SlackBotEvent = require( "../api/SlackBotEvent")
+
 module.exports = {
   async index (req, res) {
     try {
@@ -56,6 +58,10 @@ module.exports = {
         isbn,
         desc
       })
+      SlackBotEvent.notifyWishBookEnrolled(book)
+        .catch(error => {
+          logger.info(`[SlackBotEvent.notifyWishBookEnrolled] : ${error}`)
+        })
       const bookJson = book.toJSON()
       res.send({
         message: `[${bookJson.title}] 등록 성공`
