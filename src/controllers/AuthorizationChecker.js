@@ -8,8 +8,20 @@ const _AUTH_KING = 'KING'
 
 const _NO_AUTHORIZATION_ERROR = '권한이 없습니다.'
 
-const isUserAuthNone = (user) => user.authorization == _AUTH_NONE
-const isUserAuthUnderManage = (user) => user.authorization == _AUTH_NONE || user.authorization == _AUTH_USER
+const compareUpperAndLower = (auth, comparer) => {
+  return auth === comparer.toLowerCase()
+    || auth === comparer.toUpperCase()
+}
+
+const isUserAuthNone = (user) => {
+  return compareUpperAndLower(_AUTH_NONE, user.authorization)
+}
+// user.authorization === _AUTH_NONE
+const isUserAuthUnderManage = (user) => {
+  return compareUpperAndLower(_AUTH_NONE, user.authorization)
+    || compareUpperAndLower(_AUTH_USER, user.authorization)
+}
+// user.authorization === _AUTH_NONE || user.authorization === _AUTH_USER
 
 function authorizationParser(number) {
   if (number === 0) {
